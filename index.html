@@ -2,73 +2,148 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>You could be tracked.</title>
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f8f9fa;
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap');
+
+    /* Reset & base */
+    * {
+      box-sizing: border-box;
+    }
+    body, html {
+      margin: 0; padding: 0;
+      height: 100%;
+      background: linear-gradient(135deg, #1f2937, #4b5563);
+      font-family: 'Inter', sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-    }
-    .container {
-      background: #fff;
-      border: 2px solid #dc3545;
-      border-radius: 12px;
-      padding: 30px 20px;
       text-align: center;
-      box-shadow: 0 0 20px rgba(0,0,0,0.1);
-      max-width: 360px;
-      width: 90%;
-      position: relative;
+      color: #e0e7ff;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      user-select: none;
+      overflow-x: hidden;
+      padding: 20px;
     }
-    .scanner {
-      margin: 0 auto 20px;
-      width: 100px;
-      height: 100px;
-      border: 6px solid #dc3545;
-      border-top: 6px solid transparent;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
+    /* Container */
+    .container {
+      max-width: 400px;
+      width: 100%;
+      background: rgba(31, 41, 55, 0.85);
+      border-radius: 20px;
+      padding: 40px 30px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+      animation: fadeInUp 1s ease forwards;
+      opacity: 0;
     }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
+    /* Title */
     h1 {
-      color: #dc3545;
-      font-size: 20px;
-      margin-bottom: 12px;
+      font-size: clamp(1.8rem, 6vw, 2.6rem);
+      margin-bottom: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: #f87171; /* soft red */
     }
-    p {
-      font-size: 16px;
-      color: #333;
-      margin-bottom: 20px;
+    /* Dangerous tracked animation */
+    .danger-tracked {
+      font-weight: 700;
+      font-size: clamp(1rem, 4vw, 1.3rem);
+      color: #ff3b3b;
+      margin-bottom: 25px;
+      text-shadow:
+        0 0 5px #ff3b3b,
+        0 0 10px #ff0000,
+        0 0 15px #ff0000,
+        0 0 20px #ff4444;
+      animation: pulseRed 1.5s infinite, shake 0.5s infinite;
+      user-select: none;
     }
-    .scan-btn {
-      background: #dc3545;
-      color: white;
-      padding: 12px 20px;
+    /* Description */
+    p.description {
+      font-size: clamp(1rem, 4vw, 1.25rem);
+      color: #cbd5e1;
+      margin-bottom: 40px;
+      line-height: 1.4;
+    }
+    /* CTA Button */
+    button.cta-btn {
+      background: #2563eb;
       border: none;
-      border-radius: 8px;
-      font-size: 16px;
+      padding: clamp(12px, 2vw, 16px) clamp(25px, 8vw, 36px);
+      border-radius: 50px;
+      font-size: clamp(1rem, 4vw, 1.15rem);
+      font-weight: 600;
+      color: white;
       cursor: pointer;
-      transition: background 0.3s;
+      width: 100%;
+      max-width: 320px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 8px 15px rgba(37, 99, 235, 0.5);
     }
-    .scan-btn:hover {
-      background: #c82333;
+    button.cta-btn:hover {
+      background: #1e40af;
+      transform: scale(1.05);
+      box-shadow: 0 12px 20px rgba(30, 64, 175, 0.7);
+    }
+    /* Animasi */
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes pulseRed {
+      0%, 100% {
+        text-shadow:
+          0 0 5px #ff3b3b,
+          0 0 10px #ff0000,
+          0 0 15px #ff0000,
+          0 0 20px #ff4444;
+        color: #ff3b3b;
+      }
+      50% {
+        text-shadow:
+          0 0 15px #ff0000,
+          0 0 30px #ff0000,
+          0 0 40px #ff4444,
+          0 0 50px #ff0000;
+        color: #ff0000;
+      }
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-2px); }
+      50% { transform: translateX(2px); }
+      75% { transform: translateX(-2px); }
+    }
+    /* Responsive for smaller devices */
+    @media (max-width: 320px) {
+      .container {
+        padding: 30px 20px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="scanner"></div>
-    <h1>⚠️ You could be tracked.</h1>
-    <p>Device Scan Recommended.</p>
-    <button class="scan-btn" onclick="window.location.href='https://yq7yv.bemobtrcks.com/click'">Start Scan</button>
+    <h1>You could be tracked.</h1>
+    <div class="danger-tracked">⚠️ Dangerous Tracked! ⚠️</div>
+    <p class="description">Device Scan Recommended.</p>
+    <button class="cta-btn" onclick="handleClick()">Scan Now</button>
   </div>
+
+  <script>
+    function handleClick() {
+      // Ganti dengan URL smartlink campaign kamu
+      const targetUrl = "https://yq7yv.bemobtrcks.com/click";
+      window.location.href = targetUrl;
+    }
+  </script>
 </body>
 </html>
